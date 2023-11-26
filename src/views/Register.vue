@@ -23,14 +23,18 @@
 </template>
 
 <script setup>
-import { ref , reactive } from 'vue';
-import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus';
-// import router from '@/router';
-import { registerUser } from '@/api/userApi';
+import { ref, reactive } from 'vue'
+import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus'
+import { useRouter } from 'vue-router'
+import { registerUser } from '@/api/userApi'
+import usePageTitle from '@/hooks/usePageTitle'
+import useNavToHome from '@/hooks/useNavToHome'
 
-import usePageTitle from '@/hooks/usePageTitle';
+usePageTitle('注册')
 
-usePageTitle('注册');
+const router = useRouter()
+
+useNavToHome() //如果用户已经登陆 则跳转到首页
 
 const registerForm = ref()
 
@@ -38,66 +42,64 @@ const formData = reactive({
   username: '',
   password: '',
   confirmPassword: '',
-  nickname: '',
-});
+  nickname: ''
+})
 
 const registerRules = {
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
-    { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名只能包含字母、数字和下划线' },
+    { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名只能包含字母、数字和下划线' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 5, max: 10, message: '密码长度在5-10个字符之间', trigger: 'blur' },
+    { min: 5, max: 10, message: '密码长度在5-10个字符之间', trigger: 'blur' }
   ],
   confirmPassword: [
     { required: true, message: '请确认密码', trigger: 'blur' },
     {
       validator: (rule, value, callback) => {
         if (value !== formData.password) {
-          callback(new Error('两次输入的密码不一致'));
+          callback(new Error('两次输入的密码不一致'))
         } else {
-          callback();
+          callback()
         }
       },
-      trigger: 'blur',
-    },
+      trigger: 'blur'
+    }
   ],
-  nickname: [
-    { required: true, message: '请输入昵称', trigger: 'blur' },
-  ],
-};
+  nickname: [{ required: true, message: '请输入昵称', trigger: 'blur' }]
+}
 
 const register = (formEl) => {
-    formEl.validate(async (valid) => {
+  formEl.validate(async (valid) => {
     if (valid) {
       // 发送注册请求
-      await registerUser(formData);
+      await registerUser(formData)
 
       //跳转到登录页
-    //   router.push('/login');
-      
+      router.push('/login')
     } else {
-      console.log('表单校验不通过');
-      return false;
+      console.log('表单校验不通过')
+      return false
     }
-  });
-};
+  })
+}
 </script>
 
-<style scoped>.register-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-  }
-  
-  .register-title {
-    margin-bottom: 20px;
-  }
-  
-  .register-form {
-    width: 400px;
-  }
+<style scoped>
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.register-title {
+  margin-bottom: 20px;
+}
+
+.register-form {
+  width: 400px;
+}
 </style>

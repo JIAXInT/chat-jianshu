@@ -1,21 +1,28 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import  NavMenu  from "./components/NavMenu.vue"
-import SearchInput from './components/SearchInput.vue';
-import UserInfo from './components/UserInfo.vue';
+import NavMenu from './components/NavMenu.vue'
+import SearchInput from './components/SearchInput.vue'
+import UserInfo from './components/UserInfo.vue'
+import { getUserInfo } from './api/userApi'
+import { useUserStore } from './stores/user'
 
+const { setUserInfo } = useUserStore()
+
+// 获取用户信息
+getUserInfo().then((res) => {
+  setUserInfo(res)
+})
 </script>
 
 <template>
   <div>
     <div class="navbar">
       <div class="navbar-left">
-      <div class="logo">
-        <RouterLink to="/home"><h1>Logo</h1></RouterLink>
-      </div>
-        <NavMenu class="nav-menu"/>
+        <div class="logo">
+          <RouterLink to="/home"><h1>Logo</h1></RouterLink>
+        </div>
+        <NavMenu class="nav-menu" />
         <SearchInput></SearchInput>
-        
       </div>
       <div class="navbar-right">
         <UserInfo></UserInfo>

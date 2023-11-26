@@ -1,68 +1,65 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axiosInstance'
 
-const blogApi = {
-  // 获取文章列表
-  async getArticleList() {
-    return axiosInstance.get('/api/articles');
-  },
+// 获取文章列表
+export async function getBlogList(opt = {}) {
+  const { page = 1, pageSize = 10, category = '', keyword = '' } = opt
+  const url = `/api/blogs?page=${page}&pageSize=${pageSize}&category=${category}&keyword=${keyword}`
+  return (await axiosInstance.get(url)).data
+}
 
-  // 获取单篇文章详情
-  async getArticleDetails(articleId) {
-    return axiosInstance.get(`/api/articles/${articleId}`);
-  },
+// 获取单篇文章详情
+export async function getBlogDetails(BlogId) {
+  return axiosInstance.get(`/api/blogs/${BlogId}`)
+}
 
-  // 发布文章
-  async createArticle(articleData) {
-    return axiosInstance.post('/api/articles', articleData);
-  },
+// 发布文章
+export async function createBlog(BlogData) {
+  return axiosInstance.post('/api/blogs', BlogData)
+}
 
-  // 编辑文章
-  async editArticle(articleId, articleData) {
-    return axiosInstance.put(`/api/articles/${articleId}`, articleData);
-  },
+// 编辑文章
+export async function editBlog(BlogId, BlogData) {
+  return axiosInstance.put(`/api/blogs/${BlogId}`, BlogData)
+}
 
-  // 删除文章
-  async deleteArticle(articleId) {
-    return axiosInstance.delete(`/api/articles/${articleId}`);
-  },
+// 删除文章
+export async function deleteBlog(BlogId) {
+  return axiosInstance.delete(`/api/blogs/${BlogId}`)
+}
 
-  // 获取文章评论
-  async getArticleComments(articleId) {
-    return axiosInstance.get(`/api/articles/${articleId}/comments`);
-  },
+// 获取文章评论
+export async function getBlogComments(BlogId) {
+  return axiosInstance.get(`/api/blogs/${BlogId}/comments`)
+}
 
-  // 发表评论
-  async createComment(articleId, commentData) {
-    return axiosInstance.post(`/api/articles/${articleId}/comments`, commentData);
-  },
+// 发表评论
+export async function createComment(BlogId, commentData) {
+  return axiosInstance.post(`/api/blogs/${BlogId}/comments`, commentData)
+}
 
-  // 删除评论
-  async deleteComment(commentId) {
-    return axiosInstance.delete(`/api/comments/${commentId}`);
-  },
+// 删除评论
+export async function deleteComment(commentId) {
+  return axiosInstance.delete(`/api/comments/${commentId}`)
+}
+// 点赞文章
+export async function likeBlog(BlogId) {
+  return axiosInstance.post(`/api/blogs/${BlogId}/like`)
+}
 
-  // 点赞文章
-  async likeArticle(articleId) {
-    return axiosInstance.post(`/api/articles/${articleId}/like`);
-  },
+//取消点赞
+export async function unlikeBlog(BlogId) {
+  return axiosInstance.delete(`/api/blogs/${BlogId}/like`)
+}
 
-  //取消点赞
-  async unlikeArticle(articleId) {
-    return axiosInstance.delete(`/api/articles/${articleId}/like`);
-  },
+// 收藏文章
+export async function favoriteBlog(BlogId) {
+  return axiosInstance.post(`/api/blogs/${BlogId}/favorite`)
+}
 
-  // 收藏文章
-  async favoriteArticle(articleId) {
-    return axiosInstance.post(`/api/articles/${articleId}/favorite`);
-  },
+// 取消收藏文章
+export async function unfavoriteBlog(BlogId) {
+  return axiosInstance.delete(`/api/blogs/${BlogId}/favorite`)
+}
 
-  // 取消收藏文章
-  async unfavoriteArticle(articleId) {
-    return axiosInstance.delete(`/api/articles/${articleId}/favorite`);
-  },
-
-  // 其他博客相关的API请求
-  // ...
-};
-
-export default blogApi;
+// 其他博客相关的API请求
+// ...
