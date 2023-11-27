@@ -3,6 +3,7 @@ import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import usePageTitle from '@/hooks/usePageTitle'
 import { getBlogList } from '@/api/blogApi'
+import BlogCard from '../components/BlogCard.vue'
 
 usePageTitle('首页')
 
@@ -28,10 +29,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-  <h1>Home</h1>
-  <ul>
-    <li v-for="blog in list" :key="blog.id">
-      <router-link :to="`/blog/${blog.id}`">{{ blog.title }}</router-link>
-    </li>
-  </ul>
+  <div v-for="item in list" :key="item.id">
+    <blog-card :blog="item"></blog-card>
+  </div>
 </template>

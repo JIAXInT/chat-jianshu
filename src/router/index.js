@@ -1,45 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import BlogDetailView  from "../views/BlogDetailView.vue"
-import LoginView from "../views/LoginView.vue"
-import MyBlogsView from "../views/MyBlogsView.vue"
-import Register from "../views/Register.vue"
-import CreateEditsBlogView from "../views/CreateEditsBlogView.vue"
-import AboutView from "../views/AboutView.vue"
-import HomeView from "../views/HomeView.vue"
-
+import BlogDetailView from '../views/BlogDetailView.vue'
+import LoginView from '../views/LoginView.vue'
+import MyBlogsView from '../views/MyBlogsView.vue'
+import Register from '../views/Register.vue'
+import CreateEditsBlogView from '../views/CreateEditsBlogView.vue'
+import AboutView from '../views/AboutView.vue'
+import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path:'/home',
+      path: '/',
       component: HomeView
     },
     {
-      path:'/login',
+      path: '/home',
+      component: HomeView
+    },
+    {
+      path: '/login',
       component: LoginView
     },
     {
-      path:'/register',
+      path: '/register',
       component: Register
     },
     {
-      path:'/my-blogs',
+      path: '/my-blogs',
       component: MyBlogsView
     },
     {
-      path:'/create-edit-blog',
+      path: '/create-edit-blog',
       component: CreateEditsBlogView
     },
     {
-      path:'/blog-detail/:id',
+      path: '/blog-detail/:id',
       component: BlogDetailView
     },
     {
-      path:'/about',
-      component:AboutView
+      path: '/about',
+      component: AboutView
     }
-
   ]
 })
 
