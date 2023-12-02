@@ -16,7 +16,7 @@
     </div>
     <div class="blog-card-content">
       <h3 class="title">
-        <a :href="`/blog/${blog.id}`">{{ blog.title }}</a>
+        <a :href="`/blog-detail/${blog.id}`">{{ blog.title }}</a>
       </h3>
       <p class="description">{{ blog.description }}</p>
     </div>
