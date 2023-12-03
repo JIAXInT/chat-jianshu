@@ -31,7 +31,7 @@ const router = createRouter({
       component: MyBlogsView
     },
     {
-      path: '/create-edit-blog',
+      path: '/blog/:id/edit/',
       component: CreateEditsBlogView
     },
     {

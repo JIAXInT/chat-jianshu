@@ -2,8 +2,8 @@ import axiosInstance from './axiosInstance'
 
 // 获取文章列表
 export async function getBlogList(opt = {}) {
-  const { page = 1, pageSize = 10, category = '', keyword = '' } = opt
-  const url = `/api/blogs?page=${page}&pageSize=${pageSize}&category=${category}&keyword=${keyword}`
+  const { page = 1, pageSize = 10, category = '', keyword = '', my = false } = opt
+  const url = `/api/blogs?page=${page}&pageSize=${pageSize}&category=${category}&keyword=${keyword}&my=${my}`
   return (await axiosInstance.get(url)).data
 }
 
